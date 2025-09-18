@@ -1,8 +1,8 @@
 ---
 export interface Props {
-  image: string | { src: string; width?: number; height?: number }; // admite string o ImageMetadata
-  height?: string;   // ej: "65vh", "70vh", "600px"
-  overlay?: string;  // ej: "bg-black/50"
+  image: string | { src: string; width?: number; height?: number };
+  height?: string;
+  overlay?: string;
   title: string;
   subtitle: string;
 }
@@ -10,58 +10,260 @@ export interface Props {
 const {
   image,
   height = '65vh',
-  overlay = 'bg-black/50',
+  overlay = 'bg-black/40',
   title,
   subtitle,
 } = Astro.props;
 
-// si viene ImageMetadata, uso image.src
 const src = typeof image === 'string' ? image : image.src;
 ---
 
-<section class="relative flex items-center justify-center overflow-hidden" style={`height:${height}`}>
-  <!-- Imagen de fondo -->
-  <img 
-    src={src} 
-    alt="" 
-    aria-hidden="true" 
-    class="absolute inset-0 w-full h-full object-cover" 
-    loading="eager" 
-    decoding="async" 
-  />
+<section class="relative flex items-center justify-center overflow-hidden hero-section" style={`height:${height}`}>
+  <!-- Imagen de fondo con efecto parallax sutil -->
+  <div class="absolute inset-0">
+    <img 
+      src={src} 
+      alt="" 
+      aria-hidden="true" 
+      class="w-full h-full object-cover transform scale-105 hero-image" 
+      loading="eager" 
+      decoding="async" 
+    />
+  </div>
 
-  <!-- Capa oscura encima de la imagen -->
-  <div class={`absolute inset-0 ${overlay}`} aria-hidden="true"></div>
+  <!-- Overlay con gradiente más sofisticado -->
+  <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60" aria-hidden="true"></div>
+  
+  <!-- Elementos decorativos minimalistas -->
+  <div class="absolute inset-0 opacity-10" aria-hidden="true">
+    <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-white rounded-full animate-pulse"></div>
+    <div class="absolute bottom-1/3 left-1/5 w-1 h-1 bg-white rounded-full animate-pulse" style="animation-delay: 1.5s;"></div>
+  </div>
 
-  <!-- Contenido -->
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 drop-shadow-2xl">
-      {title}
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
-        con Experiencia
-      </span>
+  <!-- Contenido principal -->
+  <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <!-- Línea decorativa superior -->
+    <div class="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent mx-auto mb-8 hero-line"></div>
+    
+    <!-- Título principal -->
+    <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl font-light mb-8 text-white tracking-tight">
+      <span class="font-normal">{title}</span>
+      <br />
+      <span class="hero-gradient font-semibold">con Experiencia</span>
     </h1>
 
-    <p class="text-xl sm:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
-      {subtitle}
-    </p>
+    <!-- Subtítulo -->
+    <div class="hero-subtitle mb-12">
+      <p class="text-lg sm:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed font-light">
+        {subtitle}
+      </p>
+    </div>
 
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+    <!-- Botones CTA minimalistas -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center hero-buttons">
       <a 
         href="/proyectos" 
-        class="text-white px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 transform hover:scale-105"
-        style="background-color:#f66500; box-shadow:0 8px 25px 0 rgba(246,101,0,.5);"
+        class="group relative overflow-hidden px-8 py-4 rounded-full font-medium transition-all duration-300 hero-cta-primary"
+        style="background-color: #f66500;"
       >
-        Ver Proyectos
+        <span class="relative z-10 text-white">Ver Proyectos</span>
+        <div class="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </a>
 
       <a 
         href="/contacto" 
-        class="bg-white/90 backdrop-blur-sm px-8 py-4 rounded-lg font-semibold hover:bg-white transition-all duration-200 transform hover:scale-105"
-        style="color:#f66500; border:2px solid rgba(255,255,255,.3);"
+        class="group px-8 py-4 rounded-full font-medium border-2 border-white/30 text-white backdrop-blur-sm hover:border-white/50 hover:bg-white/10 transition-all duration-300 hero-cta-secondary"
       >
         Contactar
       </a>
     </div>
+
+    <!-- Línea decorativa inferior -->
+    <div class="w-8 h-px bg-white/40 mx-auto mt-12 hero-line-bottom"></div>
+  </div>
+
+  <!-- Indicador de scroll minimalista -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60">
+    <div class="flex flex-col items-center space-y-2 animate-bounce">
+      <span class="text-xs font-light uppercase tracking-widest">Scroll</span>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
   </div>
 </section>
+
+<style>
+  .hero-section {
+    position: relative;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  }
+  
+  /* Imagen con efecto parallax sutil */
+  .hero-image {
+    transition: transform 20s ease-in-out;
+    animation: subtleParallax 20s ease-in-out infinite alternate;
+  }
+  
+  @keyframes subtleParallax {
+    0% { transform: scale(1.05) translateY(0px); }
+    100% { transform: scale(1.08) translateY(-10px); }
+  }
+  
+  /* Título con tipografía refinada */
+  .hero-title {
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  
+  /* Gradiente para "con Experiencia" */
+  .hero-gradient {
+    background: linear-gradient(135deg, #f66500 0%, #ff8533 50%, #ffab66 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    text-shadow: none;
+  }
+  
+  /* Fallback para navegadores que no soporten gradientes en texto */
+  @supports not (background-clip: text) {
+    .hero-gradient {
+      color: #f66500;
+    }
+  }
+  
+  /* Animaciones de entrada */
+  .hero-title {
+    animation: fadeInUp 1.2s ease-out 0.3s both;
+  }
+  
+  .hero-subtitle {
+    animation: fadeInUp 1.2s ease-out 0.6s both;
+  }
+  
+  .hero-buttons {
+    animation: fadeInUp 1.2s ease-out 0.9s both;
+  }
+  
+  .hero-line {
+    animation: expandLine 1s ease-out 0.2s both;
+  }
+  
+  .hero-line-bottom {
+    animation: expandLine 1s ease-out 1.2s both;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes expandLine {
+    from {
+      transform: scaleX(0);
+      opacity: 0;
+    }
+    to {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+  
+  /* Efectos hover refinados */
+  .hero-cta-primary {
+    box-shadow: 0 8px 25px rgba(246, 101, 0, 0.4);
+    transform: translateY(0);
+  }
+  
+  .hero-cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(246, 101, 0, 0.5);
+  }
+  
+  .hero-cta-secondary:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* Responsive refinado */
+  @media (max-width: 640px) {
+    .hero-title {
+      font-size: 2.5rem;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero-subtitle p {
+      font-size: 1.125rem;
+      line-height: 1.6;
+    }
+    
+    .hero-buttons {
+      margin-bottom: 2rem;
+    }
+    
+    .hero-cta-primary,
+    .hero-cta-secondary {
+      width: 100%;
+      max-width: 280px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+    
+    .hero-buttons {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+  
+  /* Hover para pausar parallax */
+  .hero-section:hover .hero-image {
+    animation-play-state: paused;
+  }
+  
+  /* Accesibilidad mejorada */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-image {
+      animation: none;
+      transform: scale(1.05);
+    }
+    
+    .hero-title,
+    .hero-subtitle,
+    .hero-buttons,
+    .hero-line,
+    .hero-line-bottom {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    
+    .animate-bounce,
+    .animate-pulse {
+      animation: none;
+    }
+  }
+  
+  /* Mejoras de contraste para mejor legibilidad */
+  @media (prefers-contrast: high) {
+    .hero-gradient {
+      color: #ff6600;
+    }
+    
+    .hero-cta-secondary {
+      border-color: rgba(255, 255, 255, 0.8);
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+  }
+</style>

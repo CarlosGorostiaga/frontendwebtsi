@@ -1,16 +1,16 @@
 ---
 export interface Props {
-  image?: string | { src: string; width?: number; height?: number }; // string o ImageMetadata
-  height?: string;   // "50vh", "60vh", etc.
+  image?: string | { src: string; width?: number; height?: number };
+  height?: string;
   title: string;
   subtitle?: string;
-  overlay?: string;  // "bg-black/50" por defecto
+  overlay?: string;
 }
 
 const {
   image,
   height = '50vh',
-  overlay = 'bg-black/50',
+  overlay = 'bg-black/40',
   title,
   subtitle = ''
 } = Astro.props;
@@ -18,14 +18,192 @@ const {
 const src = typeof image === 'string' ? image : image?.src;
 ---
 
-<section class="relative flex items-center justify-center overflow-hidden" style={`height:${height}`}>
+<section class="relative flex items-center justify-center overflow-hidden hero-section" style={`height:${height}`}>
   {src && (
-    <img src={src} alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover" loading="eager" decoding="async" />
+    <div class="absolute inset-0">
+      <img 
+        src={src} 
+        alt="" 
+        aria-hidden="true" 
+        class="w-full h-full object-cover transform scale-105 hero-image" 
+        loading="eager" 
+        decoding="async" 
+      />
+    </div>
   )}
-  <div class={`absolute inset-0 ${overlay}`} aria-hidden="true"></div>
+  
+  <!-- Overlay con gradiente más sofisticado -->
+  <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60" aria-hidden="true"></div>
+  
+  <!-- Elementos decorativos minimalistas -->
+  <div class="absolute inset-0 opacity-8" aria-hidden="true">
+    <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-white rounded-full animate-pulse"></div>
+    <div class="absolute bottom-1/3 left-1/5 w-1 h-1 bg-white rounded-full animate-pulse" style="animation-delay: 1.5s;"></div>
+    <div class="absolute top-1/2 left-1/4 w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse" style="animation-delay: 3s;"></div>
+  </div>
 
-  <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-    <h1 class="text-4xl sm:text-5xl font-bold mb-4">{title}</h1>
-    {subtitle && <p class="text-lg sm:text-xl opacity-95 max-w-3xl mx-auto">{subtitle}</p>}
+  <!-- Contenido principal -->
+  <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <!-- Línea decorativa superior -->
+    <div class="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent mx-auto mb-8 hero-line"></div>
+    
+    <!-- Título principal -->
+    <h1 class="hero-title text-3xl sm:text-4xl lg:text-5xl font-light mb-8 text-white tracking-tight">
+      <span class="font-normal">{title}</span>
+    </h1>
+    
+    {subtitle && (
+      <div class="hero-subtitle">
+        <p class="text-lg sm:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed font-light">
+          {subtitle}
+        </p>
+      </div>
+    )}
+    
+    <!-- Línea decorativa inferior -->
+    <div class="w-8 h-px bg-white/40 mx-auto mt-8 hero-line-bottom"></div>
+  </div>
+  
+  <!-- Indicador de scroll minimalista -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/50">
+    <div class="flex flex-col items-center space-y-2 animate-bounce">
+      <span class="text-xs font-light uppercase tracking-widest opacity-70">Scroll</span>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
   </div>
 </section>
+
+<style>
+  .hero-section {
+    position: relative;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  }
+  
+  /* Imagen con efecto parallax sutil */
+  .hero-image {
+    transition: transform 20s ease-in-out;
+    animation: subtleParallax 20s ease-in-out infinite alternate;
+  }
+  
+  @keyframes subtleParallax {
+    0% { transform: scale(1.05) translateY(0px); }
+    100% { transform: scale(1.08) translateY(-10px); }
+  }
+  
+  /* Título con tipografía refinada */
+  .hero-title {
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  
+  /* Animaciones de entrada */
+  .hero-title {
+    animation: fadeInUp 1.2s ease-out 0.3s both;
+  }
+  
+  .hero-subtitle {
+    animation: fadeInUp 1.2s ease-out 0.6s both;
+  }
+  
+  .hero-line {
+    animation: expandLine 1s ease-out 0.2s both;
+  }
+  
+  .hero-line-bottom {
+    animation: expandLine 1s ease-out 0.9s both;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes expandLine {
+    from {
+      transform: scaleX(0);
+      opacity: 0;
+    }
+    to {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+  
+  /* Responsive refinado */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.25rem;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero-subtitle p {
+      font-size: 1.125rem;
+      line-height: 1.6;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 1.875rem;
+    }
+    
+    .hero-subtitle p {
+      font-size: 1rem;
+      max-width: 100%;
+    }
+  }
+  
+  /* Hover para pausar parallax */
+  .hero-section:hover .hero-image {
+    animation-play-state: paused;
+  }
+  
+  /* Accesibilidad mejorada */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-image {
+      animation: none;
+      transform: scale(1.05);
+    }
+    
+    .hero-title,
+    .hero-subtitle,
+    .hero-line,
+    .hero-line-bottom {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    
+    .animate-bounce,
+    .animate-pulse {
+      animation: none;
+    }
+  }
+  
+  /* Mejoras de contraste para mejor legibilidad */
+  @media (prefers-contrast: high) {
+    .hero-title {
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    }
+    
+    .hero-subtitle p {
+      color: rgba(255, 255, 255, 0.95);
+    }
+  }
+  
+  /* Efecto hover sutil en el título */
+  .hero-title:hover {
+    transform: translateY(-2px);
+    transition: transform 0.3s ease;
+  }
+</style>

@@ -1,8 +1,25 @@
 ---
 import logoImg from '../assets/images/logo-no-fondo.png';
 
+// Tipos para TypeScript
+interface Office {
+  location: string;
+  type: string;
+  address: string;
+  postalCode: string;
+  phone: string;
+  email: string;
+  mapQuery: string;
+  coordinates: string;
+}
+
+interface NavigationLink {
+  name: string;
+  href: string;
+}
+
 // Información de las oficinas
-const offices = [
+const offices: Office[] = [
   {
     location: "Madrid, España",
     type: "Sede Central y Fábrica",
@@ -36,7 +53,7 @@ const offices = [
 ];
 
 // Links de navegación rápida
-const quickLinks = [
+const quickLinks: NavigationLink[] = [
   { name: "Inicio", href: "/" },
   { name: "Nosotros", href: "/nosotros" },
   { name: "Servicios", href: "/servicios" },
@@ -45,7 +62,7 @@ const quickLinks = [
 ];
 
 // Servicios principales
-const mainServices = [
+const mainServices: string[] = [
   "Gestión de Proyectos",
   "Grandes Estructuras",
   "Letras Corpóreas",
@@ -54,49 +71,56 @@ const mainServices = [
   "Termoconformado"
 ];
 
-// Función para generar URL de Google Maps para abrir en nueva pestaña
-function getGoogleMapsUrl(query: string) {
+// Función para generar URL de Google Maps
+function getGoogleMapsUrl(query: string): string {
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
 ---
 
-<footer class="bg-gray-900 text-white">
+<footer class="bg-gradient-to-b from-gray-900 to-black text-white relative overflow-hidden">
+  <!-- Elementos decorativos de fondo -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="absolute top-20 right-20 w-64 h-64 rounded-full blur-3xl" style="background-color: #f66500;"></div>
+    <div class="absolute bottom-20 left-10 w-48 h-48 rounded-full blur-3xl" style="background-color: #f66500; opacity: 0.6;"></div>
+  </div>
+
   <!-- Main Footer Content -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
       
       <!-- Company Info -->
-      <div class="lg:col-span-1">
-        <div class="flex items-center mb-6">
-          <div class="h-10 w-10 bg-white rounded-lg flex items-center justify-center p-1">
+      <div class="lg:col-span-1 space-y-6">
+        <!-- Logo y branding -->
+        <div class="flex items-center mb-8">
+          <div class="h-12 w-12 bg-white rounded-xl flex items-center justify-center p-2 shadow-lg">
             <img 
               src={logoImg.src} 
               alt="TSI Grupo Logo" 
               class="h-8 w-8 object-contain"
             />
           </div>
-          <div class="ml-3">
-            <span class="text-xl font-bold">TSI Grupo</span>
-            <span class="block text-sm text-gray-400">Imagen Corporativa</span>
+          <div class="ml-4">
+            <span class="text-2xl font-semibold">TSI Grupo</span>
+            <span class="block text-sm text-orange-400 font-medium">Imagen Corporativa</span>
           </div>
         </div>
         
-        <p class="text-gray-300 text-sm mb-6 leading-relaxed">
-          Más de 30 años de experiencia en comunicación visual y proyectos de imagen corporativa para grandes empresas a nivel nacional e internacional.
+        <p class="text-gray-300 leading-relaxed">
+          Más de 30 años transformando la comunicación visual de grandes empresas con soluciones integrales de imagen corporativa a nivel internacional.
         </p>
 
         <!-- Social Links -->
         <div class="flex space-x-4">
-          <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">
+          <a href="#" class="group w-10 h-10 bg-gray-800 hover:bg-orange-500 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
             <span class="sr-only">LinkedIn</span>
-            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+            <svg class="h-5 w-5 text-gray-400 group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
               <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
             </svg>
           </a>
-          <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">
+          <a href="mailto:info@tsigrupo.com" class="group w-10 h-10 bg-gray-800 hover:bg-orange-500 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
             <span class="sr-only">Email</span>
-            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636C.732 21.002 0 20.27 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h.727L12 10.186l9.637-6.365h.727C23.268 3.821 24 4.553 24 5.457z"/>
+            <svg class="h-5 w-5 text-gray-400 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
             </svg>
           </a>
         </div>
@@ -104,14 +128,20 @@ function getGoogleMapsUrl(query: string) {
 
       <!-- Quick Links -->
       <div class="lg:col-span-1">
-        <h3 class="text-lg font-semibold mb-6">Navegación</h3>
-        <ul class="space-y-3">
+        <h3 class="text-lg font-semibold mb-6 text-white flex items-center">
+          <div class="w-1 h-6 mr-3 rounded-full" style="background-color: #f66500;"></div>
+          Navegación
+        </h3>
+        <ul class="space-y-4">
           {quickLinks.map((link) => (
             <li>
               <a 
                 href={link.href} 
-                class="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
+                class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center group"
               >
+                <svg class="w-4 h-4 mr-2 text-gray-500 group-hover:text-orange-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
                 {link.name}
               </a>
             </li>
@@ -121,44 +151,64 @@ function getGoogleMapsUrl(query: string) {
 
       <!-- Services -->
       <div class="lg:col-span-1">
-        <h3 class="text-lg font-semibold mb-6">Servicios</h3>
-        <ul class="space-y-3">
+        <h3 class="text-lg font-semibold mb-6 text-white flex items-center">
+          <div class="w-1 h-6 mr-3 rounded-full" style="background-color: #f66500;"></div>
+          Servicios
+        </h3>
+        <ul class="space-y-4">
           {mainServices.map((service) => (
-            <li class="text-gray-300 text-sm">{service}</li>
+            <li class="text-gray-300 flex items-center">
+              <div class="w-2 h-2 rounded-full mr-3 opacity-60" style="background-color: #f66500;"></div>
+              {service}
+            </li>
           ))}
         </ul>
       </div>
 
       <!-- Contact -->
       <div class="lg:col-span-1">
-        <h3 class="text-lg font-semibold mb-6">Contacto Principal</h3>
-        <div class="text-gray-300 text-sm space-y-3">
+        <h3 class="text-lg font-semibold mb-6 text-white flex items-center">
+          <div class="w-1 h-6 mr-3 rounded-full" style="background-color: #f66500;"></div>
+          Contacto Principal
+        </h3>
+        <div class="space-y-5">
+          <!-- Dirección -->
           <div class="flex items-start">
-            <svg class="h-4 w-4 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
+            <div class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center flex-shrink-0 mr-3">
+              <svg class="h-4 w-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
             <div>
-              <div class="font-medium text-white">Madrid - Sede Central</div>
-              <div>{offices[0].address}</div>
-              <div>{offices[0].postalCode}</div>
+              <div class="font-medium text-orange-400 mb-1">Madrid - Sede Central</div>
+              <div class="text-gray-300 text-sm leading-relaxed">
+                {offices[0].address}<br/>
+                {offices[0].postalCode}
+              </div>
             </div>
           </div>
           
+          <!-- Teléfono -->
           <div class="flex items-center">
-            <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-            </svg>
-            <a href={`tel:${offices[0].phone}`} class="hover:text-white transition-colors">
+            <div class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center flex-shrink-0 mr-3">
+              <svg class="h-4 w-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+              </svg>
+            </div>
+            <a href={`tel:${offices[0].phone}`} class="text-gray-300 hover:text-orange-400 transition-colors">
               {offices[0].phone}
             </a>
           </div>
           
+          <!-- Email -->
           <div class="flex items-center">
-            <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-            </svg>
-            <a href={`mailto:${offices[0].email}`} class="hover:text-white transition-colors">
+            <div class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center flex-shrink-0 mr-3">
+              <svg class="h-4 w-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <a href={`mailto:${offices[0].email}`} class="text-gray-300 hover:text-orange-400 transition-colors">
               {offices[0].email}
             </a>
           </div>
@@ -167,71 +217,96 @@ function getGoogleMapsUrl(query: string) {
     </div>
 
     <!-- Offices Section with Maps -->
-    <div class="border-t border-gray-800 mt-12 pt-8">
-      <h3 class="text-lg font-semibold mb-6 text-center">Nuestras Oficinas</h3>
+    <div class="border-t border-gray-700/50 mt-16 pt-12">
+      <!-- Header de oficinas -->
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full mb-4" style="background-color: #f66500;">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-light text-white mb-2">
+          Presencia <span class="font-semibold footer-gradient">Internacional</span>
+        </h3>
+        <p class="text-gray-400">Encuentra la oficina más cercana a ti</p>
+      </div>
+
+      <!-- Grid de oficinas -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {offices.map((office) => (
-          <div class="bg-gray-800 rounded-lg overflow-hidden">
-            <!-- Map Iframe -->
-            <div class="relative group h-48">
-              <iframe
-                src={`https://www.google.com/maps?q=${encodeURIComponent(office.coordinates)}&z=15&output=embed`}
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                class="w-full h-full border-0"
-              ></iframe>
-              <!-- Overlay with link to open in Google Maps -->
-              <a 
-                href={getGoogleMapsUrl(office.mapQuery)}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="absolute inset-0 bg-black/0 group-hover:bg-black/30 flex items-center justify-center transition-all duration-200"
-              >
-                <div class="bg-orange-500 text-white px-3 py-1 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-200">
-                  Ver en Google Maps
+        {offices.map((office, index) => (
+          <div class="group office-card">
+            <div class="bg-gray-800/60 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/50 hover:border-orange-500/50 transition-all duration-500">
+              <!-- Map Iframe -->
+              <div class="relative h-48 overflow-hidden">
+                <iframe
+                  src={`https://www.google.com/maps?q=${encodeURIComponent(office.coordinates)}&z=15&output=embed`}
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  class="w-full h-full border-0 transform group-hover:scale-105 transition-transform duration-700"
+                ></iframe>
+                <!-- Overlay elegante -->
+                <a 
+                  href={getGoogleMapsUrl(office.mapQuery)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="absolute inset-0 bg-black/0 group-hover:bg-black/40 flex items-center justify-center transition-all duration-300"
+                >
+                  <div class="bg-orange-500 hover:bg-orange-400 text-white px-4 py-2 rounded-full text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+                    Ver en Google Maps
+                  </div>
+                </a>
+              </div>
+              
+              <!-- Office Info -->
+              <div class="p-6">
+                <div class="text-center mb-4">
+                  <h4 class="font-semibold text-white text-lg mb-1">{office.location}</h4>
+                  <p class="text-orange-400 text-sm font-medium">{office.type}</p>
                 </div>
-              </a>
-            </div>
-            
-            <!-- Office Info -->
-            <div class="p-6 text-center">
-              <h4 class="font-semibold text-white mb-2">{office.location}</h4>
-              <p class="text-orange-400 text-sm mb-3">{office.type}</p>
-              <div class="text-gray-300 text-sm space-y-1">
-                <p>{office.address}</p>
-                <p>{office.postalCode}</p>
-                <div class="pt-3 space-y-2">
-                  <div class="flex items-center justify-center">
-                    <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                    </svg>
-                    <a href={`tel:${office.phone}`} class="hover:text-white transition-colors">
+                
+                <div class="space-y-3 text-center">
+                  <div class="text-gray-300 text-sm">
+                    <p>{office.address}</p>
+                    <p>{office.postalCode}</p>
+                  </div>
+                  
+                  <!-- Contacto -->
+                  <div class="flex flex-col space-y-2 pt-3 border-t border-gray-700/50">
+                    <a 
+                      href={`tel:${office.phone}`} 
+                      class="flex items-center justify-center text-gray-300 hover:text-orange-400 transition-colors text-sm"
+                    >
+                      <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                      </svg>
                       {office.phone}
                     </a>
-                  </div>
-                  <div class="flex items-center justify-center">
-                    <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                    </svg>
-                    <a href={`mailto:${office.email}`} class="hover:text-white transition-colors">
+                    
+                    <a 
+                      href={`mailto:${office.email}`} 
+                      class="flex items-center justify-center text-gray-300 hover:text-orange-400 transition-colors text-sm"
+                    >
+                      <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                      </svg>
                       {office.email}
                     </a>
                   </div>
-                </div>
-                
-                <!-- Direction Button -->
-                <div class="pt-3">
-                  <a 
-                    href={getGoogleMapsUrl(office.mapQuery)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center px-3 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm rounded-lg transition-colors duration-200"
-                  >
-                    <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
-                    </svg>
-                    Cómo llegar
-                  </a>
+                  
+                  <!-- Direction Button -->
+                  <div class="pt-4">
+                    <a 
+                      href={getGoogleMapsUrl(office.mapQuery)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center justify-center px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm rounded-full transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                    >
+                      <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                      </svg>
+                      Cómo llegar
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -242,28 +317,128 @@ function getGoogleMapsUrl(query: string) {
   </div>
 
   <!-- Bottom Footer -->
-  <div class="border-t border-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-      <div class="md:flex md:items-center md:justify-between">
-        <div class="flex justify-center md:order-2">
+  <div class="border-t border-gray-700/50 bg-black/20 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+        <!-- Copyright -->
+        <div class="flex items-center justify-center md:justify-start">
           <p class="text-gray-400 text-sm">
             © {new Date().getFullYear()} TSI Grupo. Todos los derechos reservados.
           </p>
         </div>
-        <div class="mt-4 flex justify-center md:mt-0 md:order-1">
-          <div class="flex space-x-6">
-            <a href="/privacy" class="text-gray-400 hover:text-white text-sm transition-colors">
-              Política de Privacidad
-            </a>
-            <a href="/legal" class="text-gray-400 hover:text-white text-sm transition-colors">
-              Aviso Legal
-            </a>
-            <a href="/cookies" class="text-gray-400 hover:text-white text-sm transition-colors">
-              Cookies
-            </a>
-          </div>
+        
+        <!-- Legal Links -->
+        <div class="flex items-center justify-center space-x-6">
+          <a href="/privacy" class="text-gray-400 hover:text-orange-400 text-sm transition-colors">
+            Política de Privacidad
+          </a>
+          <span class="text-gray-600">•</span>
+          <a href="/legal" class="text-gray-400 hover:text-orange-400 text-sm transition-colors">
+            Aviso Legal
+          </a>
+          <span class="text-gray-600">•</span>
+          <a href="/cookies" class="text-gray-400 hover:text-orange-400 text-sm transition-colors">
+            Cookies
+          </a>
         </div>
       </div>
     </div>
   </div>
 </footer>
+
+<style>
+  /* Gradiente para "Internacional" */
+  .footer-gradient {
+    background: linear-gradient(135deg, #f66500 0%, #ff8533 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  /* Fallback para navegadores que no soporten gradientes en texto */
+  @supports not (background-clip: text) {
+    .footer-gradient {
+      color: #f66500;
+    }
+  }
+
+  /* Animaciones de entrada para las tarjetas de oficina */
+  .office-card {
+    animation: fadeInUp 0.6s ease-out both;
+  }
+
+  .office-card:nth-child(1) { animation-delay: 0.1s; }
+  .office-card:nth-child(2) { animation-delay: 0.2s; }
+  .office-card:nth-child(3) { animation-delay: 0.3s; }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Efecto hover en los mapas */
+  .office-card:hover iframe {
+    filter: brightness(1.1) contrast(1.05);
+  }
+
+  /* Responsive mejorado */
+  @media (max-width: 1024px) {
+    .grid.lg\\:grid-cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .grid.lg\\:grid-cols-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .grid.lg\\:grid-cols-4,
+    .grid.lg\\:grid-cols-3 {
+      grid-template-columns: 1fr;
+    }
+    
+    .office-card .p-6 {
+      padding: 1.5rem;
+    }
+  }
+
+  /* Accesibilidad */
+  @media (prefers-reduced-motion: reduce) {
+    .office-card {
+      animation: none;
+    }
+    
+    .group:hover .group-hover\\:scale-105,
+    .group:hover .group-hover\\:scale-110 {
+      transform: none;
+    }
+    
+    .hover\\:scale-105:hover,
+    .hover\\:scale-110:hover {
+      transform: none;
+    }
+  }
+
+  /* Mejora el contraste */
+  @media (prefers-contrast: high) {
+    .bg-gray-800\\/60 {
+      background-color: rgb(31 41 55 / 0.8);
+    }
+    
+    .footer-gradient {
+      color: #ff8533;
+    }
+    
+    .border-gray-700\\/50 {
+      border-color: rgb(55 65 81 / 0.7);
+    }
+  }
+</style>

@@ -1,7 +1,7 @@
 ---
 /**
- * Services.astro
- * Grid de 6 servicios con fotos grandes 16:9
+ * Services.astro - Versión minimalista y elegante
+ * Grid de 6 servicios con diseño refinado
  */
 
 import imgGestion from '../assets/images/gestionproyectostsi.jpg';
@@ -11,138 +11,330 @@ import imgMantenimiento from '../assets/images/Mantenimiento.jpg';
 import imgProduccion from '../assets/images/produccion-servicios.jpg';
 import imgConsultoria from '../assets/images/consultoria-servicios.jpg';
 
-type Svc = {
+// Tipos mejorados con iconos
+type IconType = 'project' | 'innovation' | 'production' | 'installation' | 'maintenance' | 'consulting';
+
+interface Service {
   title: string;
   desc: string;
   img: { src: string };
+  icon: IconType;
   href?: string | null;
   cta?: string;
-};
+}
 
-const services: Svc[] = [
+const services: Service[] = [
   {
     title: "Gestión de proyectos",
-    desc:
-      "Equipo técnico especializado en planificar y orientar proyectos de inicio a fin, adaptando la gestión a los requisitos del cliente: toma de datos, planos, cálculos de ingeniería, etc.",
+    desc: "Equipo técnico especializado en planificar y orientar proyectos de inicio a fin, adaptando la gestión a los requisitos del cliente: toma de datos, planos, cálculos de ingeniería.",
     img: imgGestion,
+    icon: "project",
     href: "/servicios#gestion-de-proyectos",
     cta: "Saber más"
   },
   {
     title: "Desarrollo, ingeniería e I+D+i",
-    desc:
-      "Ingeniería de producto y constructiva con un departamento de I+D+i. Incorporamos nuevas tecnologías, materiales sostenibles y optimización de procesos productivos.",
+    desc: "Ingeniería de producto y constructiva con un departamento de I+D+i. Incorporamos nuevas tecnologías, materiales sostenibles y optimización de procesos productivos.",
     img: imgIDi,
+    icon: "innovation",
     href: "/servicios#idi",
     cta: "Proyectos de I+D+i"
   },
   {
     title: "Producción",
-    desc:
-      "Planta de producción en Madrid con maquinaria avanzada para cubrir todas las fases con alto rendimiento y acabados impecables. Diferentes secciones especializadas.",
+    desc: "Planta de producción en Madrid con maquinaria avanzada para cubrir todas las fases con alto rendimiento y acabados impecables. Diferentes secciones especializadas.",
     img: imgProduccion,
+    icon: "production",
     href: "/servicios#produccion",
     cta: "Técnicas de fabricación"
   },
   {
     title: "Instalación y montaje",
-    desc:
-      "Amplios equipos de montaje para responder a actuaciones urgentes y grandes campañas. Instalamos cualquier elemento de imagen cumpliendo con seguridad y salud.",
+    desc: "Amplios equipos de montaje para responder a actuaciones urgentes y grandes campañas. Instalamos cualquier elemento de imagen cumpliendo con seguridad y salud.",
     img: imgInstalacion,
+    icon: "installation",
     href: "/servicios#instalacion",
     cta: "Cómo trabajamos"
   },
   {
     title: "Mantenimiento",
-    desc:
-      "Red de equipos de mantenimiento con respuesta rápida en toda la Península. Programas preventivos, correctivos y siniestros. Obras civiles asociadas a la instalación.",
+    desc: "Red de equipos de mantenimiento con respuesta rápida en toda la Península. Programas preventivos, correctivos y siniestros. Obras civiles asociadas a la instalación.",
     img: imgMantenimiento,
+    icon: "maintenance",
     href: "/servicios#mantenimiento",
     cta: "Solicitar mantenimiento"
   },
   {
     title: "Consultoría e imagen corporativa",
-    desc:
-      "Asesoramos a las empresas en la creación, rediseño y gestión de su identidad visual, garantizando coherencia en todos los soportes y puntos de contacto con sus clientes.",
+    desc: "Asesoramos a las empresas en la creación, rediseño y gestión de su identidad visual, garantizando coherencia en todos los soportes y puntos de contacto.",
     img: imgConsultoria,
+    icon: "consulting",
     href: "/servicios#consultoria",
     cta: "Descubrir más"
   }
 ];
+
+// Iconos SVG minimalistas
+const icons: Record<IconType, string> = {
+  project: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+  </svg>`,
+  innovation: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+  </svg>`,
+  production: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+  </svg>`,
+  installation: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+  </svg>`,
+  maintenance: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+  </svg>`,
+  consulting: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+  </svg>`
+};
 ---
 
-<section class="py-20 bg-neutral-100">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-14">
-      <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Nuestros Servicios</h2>
-      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-        Soluciones integrales de imagen corporativa: ingeniería, producción, instalación, mantenimiento y consultoría.
-      </p>
-    </div>
+<section class="py-20 bg-gradient-to-b from-white to-slate-50/50 relative overflow-hidden">
+  <!-- Elementos decorativos de fondo -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="absolute top-20 right-20 w-64 h-64 rounded-full blur-3xl" style="background-color: #f66500;"></div>
+    <div class="absolute bottom-20 left-10 w-48 h-48 rounded-full blur-3xl" style="background-color: #f66500; opacity: 0.6;"></div>
+  </div>
 
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Header minimalista -->
+    <header class="text-center mb-16">
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full mb-6" style="background-color: #f66500;">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+        </svg>
+      </div>
+      
+      <div class="space-y-4">
+        <span class="inline-block px-4 py-2 text-sm font-semibold rounded-full uppercase tracking-wider" style="background-color: #eeeeef; color: #f66500;">
+          Nuestros Servicios
+        </span>
+        <h2 class="text-3xl lg:text-4xl font-light text-gray-900 leading-tight">
+          Soluciones integrales de 
+          <span class="services-gradient font-semibold">imagen corporativa</span>
+        </h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+          De la ingeniería a la instalación: un ecosistema completo para proyectos de comunicación visual.
+        </p>
+      </div>
+    </header>
+
+    <!-- Grid de servicios -->
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-      {services.map((s) => (
-        <article
-          class="group bg-white rounded-2xl overflow-hidden shadow-lg ring-1 ring-gray-100 hover:shadow-2xl transition-all duration-300 opacity-0 translate-y-4"
-          data-reveal
-        >
-          <div class="relative w-full aspect-[16/9] overflow-hidden">
-            <img
-              src={s.img.src}
-              alt={s.title}
-              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              loading="lazy"
-              decoding="async"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-            <h3 class="absolute bottom-3 left-4 right-4 text-white text-xl font-semibold drop-shadow-md">
-              {s.title}
-            </h3>
-          </div>
-
-          <div class="p-6">
-            <p class="text-gray-600 leading-relaxed">{s.desc}</p>
-
-            {s.href && (
-              <div class="mt-6">
-                <a
-                  href={s.href}
-                  class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold text-white transition-colors"
-                  style="background-color:#f66500;"
-                >
-                  {s.cta || "Saber más"}
-                  <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                  </svg>
-                </a>
+      {services.map((service, index) => (
+        <article class="group service-card" data-reveal>
+          <div class="bg-white/60 backdrop-blur-sm rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100/50 h-full flex flex-col">
+            
+            <!-- Imagen con overlay mejorado -->
+            <div class="relative aspect-[16/9] overflow-hidden">
+              <img
+                src={service.img.src}
+                alt={service.title}
+                class="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+                decoding="async"
+              />
+              
+              <!-- Overlay con gradiente más sutil -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+              
+              <!-- Icono flotante -->
+              <div class="absolute top-4 right-4">
+                <div class="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-gray-700 group-hover:scale-110 transition-transform duration-300" style="border: 1px solid rgba(246, 101, 0, 0.2);">
+                  <Fragment set:html={icons[service.icon]} />
+                </div>
               </div>
-            )}
+              
+              <!-- Título sobre imagen -->
+              <div class="absolute bottom-4 left-4 right-4">
+                <h3 class="text-white text-xl font-medium leading-tight drop-shadow-lg">
+                  {service.title}
+                </h3>
+              </div>
+            </div>
+
+            <!-- Contenido -->
+            <div class="p-6 flex-1 flex flex-col">
+              <p class="text-gray-600 leading-relaxed text-sm flex-1 mb-6">
+                {service.desc}
+              </p>
+
+              {service.href && (
+                <div class="mt-auto">
+                  <a
+                    href={service.href}
+                    class="group/cta inline-flex items-center px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 service-cta"
+                    style="background-color: #f66500; color: white;"
+                  >
+                    <span class="relative z-10">{service.cta || "Saber más"}</span>
+                    <svg class="ml-2 w-4 h-4 transform group-hover/cta:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                    <!-- Efecto hover -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-400 opacity-0 group-hover/cta:opacity-100 transition-opacity duration-300 rounded-full"></div>
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         </article>
       ))}
     </div>
+
+    <!-- Línea decorativa final -->
+    <div class="flex justify-center mt-16">
+      <div class="flex items-center space-x-3 opacity-40">
+        <div class="w-2 h-2 rounded-full" style="background-color: #f66500;"></div>
+        <div class="w-20 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+        <div class="w-2 h-2 rounded-full" style="background-color: #f66500; opacity: 0.7;"></div>
+        <div class="w-20 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+        <div class="w-2 h-2 rounded-full" style="background-color: #f66500; opacity: 0.4;"></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<style>
-  [data-reveal] { opacity: 0; transform: translateY(8px); }
-  [data-reveal].visible {
-    opacity: 1; transform: translateY(0);
-    transition: opacity .5s ease, transform .5s ease;
-  }
-</style>
-
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const items = document.querySelectorAll('[data-reveal]');
-    const io = new IntersectionObserver((entries, obs) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          obs.unobserve(e.target);
+    const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Delay escalonado para efecto más elegante
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 100);
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.2 });
-    items.forEach(el => io.observe(el));
+    }, { 
+      threshold: 0.2,
+      rootMargin: '-50px'
+    });
+    
+    items.forEach(item => observer.observe(item));
   });
 </script>
+
+<style>
+  /* Gradiente para "imagen corporativa" */
+  .services-gradient {
+    background: linear-gradient(135deg, #f66500 0%, #ff8533 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  /* Fallback para navegadores que no soporten gradientes en texto */
+  @supports not (background-clip: text) {
+    .services-gradient {
+      color: #f66500;
+    }
+  }
+
+  /* Animaciones de entrada */
+  .service-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
+
+  .service-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Efectos hover mejorados */
+  .service-cta {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(246, 101, 0, 0.3);
+  }
+
+  .service-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(246, 101, 0, 0.4);
+  }
+
+  /* Efecto shimmer en las tarjetas */
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(246, 101, 0, 0.03), transparent);
+    transition: left 0.6s ease;
+    z-index: 1;
+  }
+
+  .service-card:hover::before {
+    left: 100%;
+  }
+
+  /* Responsive mejorado */
+  @media (max-width: 1280px) {
+    .grid.xl\\:grid-cols-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .grid.md\\:grid-cols-2 {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .service-card .p-6 {
+      padding: 1.5rem;
+    }
+    
+    .service-cta {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  /* Accesibilidad */
+  @media (prefers-reduced-motion: reduce) {
+    .service-card {
+      animation: none;
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+    
+    .group:hover .group-hover\\:scale-110,
+    .group:hover .group-hover\\:scale-105 {
+      transform: none;
+    }
+    
+    .group/cta:hover .group-hover\\/cta\\:translate-x-1 {
+      transform: none;
+    }
+  }
+
+  /* Mejora el contraste */
+  @media (prefers-contrast: high) {
+    .service-card {
+      background-color: white;
+      border-color: #d1d5db;
+    }
+    
+    .services-gradient {
+      color: #d97706;
+    }
+  }
+</style>

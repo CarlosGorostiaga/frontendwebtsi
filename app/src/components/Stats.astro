@@ -1,35 +1,117 @@
 ---
-const stats = [
-  { value: 30,  label: "Años de Experiencia"},
-  { value: 3,   label: "Países" },
-  { value: 500, label: "Proyectos", suffix: "+" },
-  { value: 100, label: "Satisfacción", suffix: "%" },
+// Definir tipos para TypeScript
+type IconType = 'calendar' | 'globe' | 'briefcase' | 'heart';
+
+interface StatItem {
+  value: number;
+  label: string;
+  icon: IconType;
+  suffix?: string;
+}
+
+const stats: StatItem[] = [
+  { value: 30,  label: "Años de Experiencia", icon: "calendar" },
+  { value: 3,   label: "Países", icon: "globe" },
+  { value: 500, label: "Proyectos", suffix: "+", icon: "briefcase" },
+  { value: 100, label: "Satisfacción", suffix: "%", icon: "heart" },
 ];
+
+// SVG Icons minimalistas con tipos seguros
+const icons: Record<IconType, string> = {
+  calendar: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+  </svg>`,
+  globe: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+  </svg>`,
+  briefcase: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0H8m8 0v2a2 2 0 002 2v8a2 2 0 002 2H6a2 2 0 01-2-2v-8a2 2 0 012-2V8"></path>
+  </svg>`,
+  heart: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+  </svg>`
+};
 ---
 
-<section class="py-16 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-      {stats.map((it, index) => (
-        <div class="p-6 transform hover:scale-105 transition-transform duration-200">
-          <div 
-            class="text-4xl lg:text-5xl font-bold mb-2 text-orange-500 counter" 
-            data-target={it.value.toString()}
-            data-suffix={it.suffix || ""}
-            id={`counter-${index}`}
-          >
-            0{it.suffix || ""}
+<section class="py-20 bg-gradient-to-b from-white to-slate-50/50 relative overflow-hidden">
+  <!-- Elementos decorativos de fondo -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="absolute top-20 right-20 w-64 h-64 rounded-full blur-3xl" style="background-color: #f66500;"></div>
+    <div class="absolute bottom-10 left-10 w-48 h-48 rounded-full blur-3xl" style="background-color: #f66500; opacity: 0.6;"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Header minimalista -->
+    <header class="text-center mb-16">
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full mb-6" style="background-color: #f66500;">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+        </svg>
+      </div>
+      
+      <div class="space-y-4">
+        <span class="inline-block px-4 py-2 text-sm font-semibold rounded-full uppercase tracking-wider" style="background-color: #eeeeef; color: #f66500;">
+          Nuestra Trayectoria
+        </span>
+        <h2 class="text-3xl lg:text-4xl font-light text-gray-900 leading-tight">
+          Números que hablan por
+          <span class="stats-gradient font-semibold">nosotros</span>
+        </h2>
+      </div>
+    </header>
+
+    <!-- Grid de estadísticas -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      {stats.map((stat, index) => (
+        <article class="group relative">
+          <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white hover:shadow-lg transition-all duration-500 border border-gray-100/50 stats-card">
+            
+            <!-- Icono -->
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300" style="background-color: #f66500; color: white;">
+              <Fragment set:html={icons[stat.icon]} />
+            </div>
+
+            <!-- Contador -->
+            <div class="mb-4">
+              <div 
+                class="text-3xl lg:text-4xl font-light mb-2 stats-counter group-hover:scale-105 transition-transform duration-300" 
+                style="color: #f66500;"
+                data-target={stat.value.toString()}
+                data-suffix={stat.suffix || ""}
+                id={`counter-${index}`}
+              >
+                0{stat.suffix || ""}
+              </div>
+            </div>
+
+            <!-- Label -->
+            <div class="text-gray-700 font-medium text-sm leading-relaxed">
+              {stat.label}
+            </div>
+
+            <!-- Línea decorativa -->
+            <div class="w-8 h-px bg-gradient-to-r from-transparent via-orange-300 to-transparent mx-auto mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
-          <div class="text-gray-600 font-medium">{it.label}</div>
-        </div>
+        </article>
       ))}
+    </div>
+
+    <!-- Línea decorativa inferior -->
+    <div class="flex justify-center mt-16">
+      <div class="flex items-center space-x-2 opacity-60">
+        <div class="w-2 h-2 rounded-full" style="background-color: #f66500;"></div>
+        <div class="w-16 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+        <div class="w-2 h-2 rounded-full" style="background-color: #f66500; opacity: 0.7;"></div>
+        <div class="w-16 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+        <div class="w-2 h-2 rounded-full" style="background-color: #f66500; opacity: 0.4;"></div>
+      </div>
     </div>
   </div>
 </section>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const counters = document.querySelectorAll<HTMLDivElement>(".counter");
+    const counters = document.querySelectorAll<HTMLDivElement>(".stats-counter");
 
     const animateCounter = (counter: HTMLDivElement) => {
       const targetAttr = counter.getAttribute("data-target");
@@ -37,34 +119,169 @@ const stats = [
       if (!targetAttr) return;
 
       const target = parseInt(targetAttr, 10);
-      const duration = 1500; // 1.5 segundos
+      const duration = 2000; // 2 segundos más elegante
       const start = performance.now();
 
       const animate = (time: number) => {
         const progress = Math.min((time - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+        // Easing más suave - easeOutQuart
+        const eased = 1 - Math.pow(1 - progress, 4);
         const value = Math.floor(eased * target);
 
         counter.textContent = value.toString() + suffix;
 
         if (progress < 1) {
           requestAnimationFrame(animate);
+        } else {
+          // Efecto final sutil
+          counter.style.transform = 'scale(1.05)';
+          setTimeout(() => {
+            counter.style.transform = 'scale(1)';
+          }, 200);
         }
       };
 
       requestAnimationFrame(animate);
     };
 
-    // Solo arrancar cuando entren en pantalla
+    // Intersection Observer mejorado
     const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
+      entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-          animateCounter(entry.target as HTMLDivElement);
-          obs.unobserve(entry.target); // solo una vez
+          // Delay escalonado para efecto más elegante
+          setTimeout(() => {
+            animateCounter(entry.target as HTMLDivElement);
+          }, index * 150);
+          obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.3 });
+    }, { 
+      threshold: 0.5,
+      rootMargin: '-50px'
+    });
 
     counters.forEach(counter => observer.observe(counter));
   });
 </script>
+
+<style>
+  /* Gradiente para "nosotros" */
+  .stats-gradient {
+    background: linear-gradient(135deg, #f66500 0%, #ff8533 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  /* Fallback para navegadores que no soporten gradientes en texto */
+  @supports not (background-clip: text) {
+    .stats-gradient {
+      color: #f66500;
+    }
+  }
+
+  /* Efectos de hover mejorados */
+  .stats-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stats-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(246, 101, 0, 0.03), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .stats-card:hover::before {
+    left: 100%;
+  }
+
+  /* Animaciones de entrada */
+  .stats-card {
+    animation: fadeInUp 0.6s ease-out both;
+  }
+
+  .stats-card:nth-child(1) { animation-delay: 0.1s; }
+  .stats-card:nth-child(2) { animation-delay: 0.2s; }
+  .stats-card:nth-child(3) { animation-delay: 0.3s; }
+  .stats-card:nth-child(4) { animation-delay: 0.4s; }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Contador con tipografía refinada */
+  .stats-counter {
+    font-feature-settings: 'tnum';
+    letter-spacing: -0.02em;
+    transition: all 0.3s ease;
+  }
+
+  /* Responsive mejorado */
+  @media (max-width: 1024px) {
+    .grid.grid-cols-2.lg\\:grid-cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .stats-card {
+      padding: 1.5rem;
+    }
+    
+    .stats-counter {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .grid.grid-cols-2.lg\\:grid-cols-4 {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    
+    .stats-card {
+      padding: 2rem 1.5rem;
+    }
+  }
+
+  /* Accesibilidad */
+  @media (prefers-reduced-motion: reduce) {
+    .stats-card,
+    .stats-counter {
+      animation: none;
+      transition: none;
+    }
+    
+    .group:hover .group-hover\\:scale-110,
+    .group:hover .group-hover\\:scale-105 {
+      transform: none;
+    }
+  }
+
+  /* Mejora el contraste */
+  @media (prefers-contrast: high) {
+    .stats-card {
+      background-color: white;
+      border-color: #d1d5db;
+    }
+    
+    .stats-gradient {
+      color: #d97706;
+    }
+  }
+</style>

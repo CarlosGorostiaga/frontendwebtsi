@@ -7,9 +7,10 @@ import AboutHero from '../components/AboutHero.astro';
 import WorldPresence from '../components/WorldPresence.astro';
 import Team from '../components/Team.astro';
 import PolicyAccordion from '../components/PolicyAccordion.astro';
+import Certifications from '../components/Certifications.astro';
 
-// Si quieres usar el mapamundi como fondo del hero:
-import mapImg from '../assets/images/mapa.jpg';
+import mapImg from '../assets/images/MAPA.jpg';
+import heroImg from '../assets/images/equipo-trabajo.jpg';
 ---
 
 <!doctype html>
@@ -18,35 +19,31 @@ import mapImg from '../assets/images/mapa.jpg';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nosotros | TSI Grupo</title>
-    <meta name="description" content="Más de 30 años acompañando a nuestros clientes en proyectos de imagen corporativa a nivel nacional e internacional." />
+    <meta name="description" content="Más de 30 años en proyectos de imagen corporativa a nivel nacional e internacional." />
   </head>
   <body class="bg-white text-gray-900 min-h-screen flex flex-col">
     <Header currentPath="/nosotros" />
 
     <main class="flex-1">
       <AboutHero
-        image={mapImg}
+        image={heroImg}
         height="45vh"
         title="Nosotros"
-        subtitle="Más de 30 años de experiencia en comunicación visual e imagen corporativa. Conocimiento, experiencia y entusiasmo para gestionar proyectos nacionales e internacionales."
+        subtitle="Conocimiento, experiencia y entusiasmo para gestionar proyectos de imagen corporativa nacionales e internacionales."
       />
 
       <!-- Intro -->
       <section class="py-14 bg-white">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="prose prose-lg max-w-none">
+          <div class="max-w-none">
             <p>
-              Nos encontramos en un momento en el que reconocemos a las empresas por su marca e imagen corporativa.
-              Por este motivo, la comunicación visual se ha convertido en un medio imprescindible de difusión.
+              Reconocemos a las empresas por su marca e imagen corporativa. Por ello, la comunicación visual es un medio imprescindible de difusión.
             </p>
-            <p>
-              Gracias a más de 30 años trabajando en el sector, contamos con la experiencia necesaria para acompañar a nuestros clientes
-              en este camino de cambio continuo. En TSI ofrecemos los conocimientos, la experiencia y el entusiasmo de nuestro equipo,
-              para la gestión completa y satisfactoria de los proyectos de imagen corporativa para grandes empresas a nivel nacional e internacional.
+            <p class="mt-4">
+              Con más de 30 años en el sector, acompañamos a nuestros clientes en un camino de cambio continuo. Ofrecemos conocimientos, experiencia y entusiasmo para gestionar proyectos de imagen corporativa para grandes empresas a nivel nacional e internacional.
             </p>
-            <p>
-              Creemos en un crecimiento económico basado en el progreso tecnológico, respetando un desarrollo sostenible de nuestra sociedad
-              mediante el respeto de nuestro entorno.
+            <p class="mt-4">
+              Creemos en un crecimiento basado en el progreso tecnológico y en el respeto por un desarrollo sostenible de nuestra sociedad.
             </p>
           </div>
         </div>
@@ -61,8 +58,8 @@ import mapImg from '../assets/images/mapa.jpg';
       <!-- Política de gestión integrada -->
       <PolicyAccordion />
 
-      <!-- (Opcional) Certificaciones -->
-      <!-- <Certifications /> -->
+      <!-- Certificaciones -->
+      <Certifications />
     </main>
 
     <Footer />
