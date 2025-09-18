@@ -1,0 +1,150 @@
+---
+/**
+ * Componente de Servicios (autosuficiente)
+ * - No depende de data externa.
+ * - Puedes ajustar el array `services` aquí mismo.
+ * - Si no quieres botones por tarjeta, pon href: null.
+ */
+
+const services = [
+  {
+    title: "Gestión de Proyectos",
+    desc: "Planificación completa: estudio, permisos, fabricación, logística e instalación. Un único interlocutor para todo el ciclo.",
+    icon: "clipboard",
+    href: "/servicios" // cambia si luego tienes página detalle
+  },
+  {
+    title: "Grandes Estructuras",
+    desc: "Fabricación e instalación de estructuras de gran formato con cálculo estructural, certificaciones y seguridad.",
+    icon: "building",
+    href: "/servicios"
+  },
+  {
+    title: "Letras Corpóreas",
+    desc: "Diseño y producción de letras con y sin iluminación, materiales premium y acabados profesionales para máxima visibilidad.",
+    icon: "type",
+    href: "/servicios"
+  },
+  {
+    title: "Impresión Digital",
+    desc: "Gran formato y alta calidad en múltiples sustratos: vinilos, lonas, rígidos… acabados y montaje incluidos.",
+    icon: "printer",
+    href: "/servicios"
+  },
+  {
+    title: "Iluminación",
+    desc: "Sistemas LED a medida con alta eficiencia y uniformidad lumínica. Integración con estructuras y rótulos.",
+    icon: "bulb",
+    href: "/servicios"
+  },
+  {
+    title: "Termoconformado",
+    desc: "Piezas volumétricas en termoplástico con moldes propios, series cortas y medias, y tiempos de entrega ajustados.",
+    icon: "shapes",
+    href: "/servicios"
+  },
+  {
+    title: "Desarrollo, Ingeniería e I+D+i",
+    desc: "Nuevas ingenierías, materiales y procesos. Eficiencia energética, sostenibilidad y optimización productiva.",
+    icon: "lab",
+    href: "/servicios"
+  },
+];
+---
+
+<section class="py-20 bg-neutral-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Nuestros Servicios</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Soluciones integrales de imagen corporativa: desde la ingeniería y fabricación hasta la instalación y el mantenimiento.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {services.map((s, i) => (
+        <article 
+          class="group bg-white p-8 rounded-2xl shadow-lg ring-1 ring-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 opacity-0 translate-y-4 will-change-auto"
+          style="animation: none"
+          data-reveal
+        >
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-orange-50">
+            {s.icon === "clipboard" && (
+              <svg class="w-6 h-6" style="color:#f66500;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v11a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+              </svg>
+            )}
+            {s.icon === "building" && (
+              <svg class="w-6 h-6" style="color:#f66500;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21h18M5 21V7a2 2 0 012-2h3v16M14 21V5a2 2 0 012-2h1a2 2 0 012 2v16"></path>
+              </svg>
+            )}
+            {s.icon === "type" && (
+              <svg class="w-6 h-6" style="color:#f66500;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M10 6v12m4-12v12M6 18h12"></path>
+              </svg>
+            )}
+            {s.icon === "printer" && (
+              <svg class="w-6 h-6" style="color:#f66500;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9V4h12v5M6 14h12v6H6zM6 14H5a2 2 0 01-2-2V9a2 2 0 012-2h14a2 2 0 012 2v3a2 2 0 01-2 2h-1"></path>
+              </svg>
+            )}
+            {s.icon === "bulb" && (
+              <svg class="w-6 h-6" style="color:#f66500;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 18h6M10 22h4M8 14a6 6 0 118 0l-.6.6A3 3 0 0015 17v1H9v-1a3 3 0 00-1.4-2.4L8 14z"></path>
+              </svg>
+            )}
+            {s.icon === "shapes" && (
+              <svg class="w-6 h-6" style="color:#f66500;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h8v8H3zM13 9h8v10h-8zM7 3h10v4H7z"></path>
+              </svg>
+            )}
+            {s.icon === "lab" && (
+              <svg class="w-6 h-6" style="color:#f66500;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 2v6l-6 10a2 2 0 001.7 3h12.6a2 2 0 001.7-3L14 8V2"></path>
+              </svg>
+            )}
+          </div>
+
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">{s.title}</h3>
+          <p class="text-gray-600 mb-6">{s.desc}</p>
+
+          {s.href && (
+            <a 
+              href={s.href} 
+              class="inline-flex items-center text-sm font-semibold text-orange-600 group-hover:text-orange-700 transition-colors"
+            >
+              Saber más
+              <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* pequeña animación de aparición */
+  [data-reveal] { opacity: 0; transform: translateY(8px); }
+  [data-reveal].visible { opacity: 1; transform: translateY(0); transition: opacity .5s ease, transform .5s ease; }
+</style>
+
+<script>
+  // IntersectionObserver para revelar tarjetas al entrar en viewport
+  document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          (e.target as HTMLElement).classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    items.forEach(el => io.observe(el));
+  });
+</script>
