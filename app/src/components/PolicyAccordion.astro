@@ -1,0 +1,75 @@
+---
+const intro = `La Dirección de TSI Ingeniería de Imagen, S.A. ha establecido la Política de Gestión Integrada para garantizar la correcta realización de su actividad de gestión de proyectos de imagen corporativa. Nuestro sistema se basa en UNE-EN ISO 9001:2015, UNE-EN ISO 14001:2015 e ISO 45001:2018.`;
+
+const commitments: string[] = [
+  "Promover la comprensión y difusión de la política dentro de la organización y entre las partes interesadas.",
+  "Control efectivo de procesos, cumplimiento legal y contractual, optimización del desarrollo de proyectos y aplicaciones visualmente manejables.",
+  "Mejora continua en procesos, métodos de actuación y relación con partes interesadas, mediante el control de datos de satisfacción del cliente.",
+  "Formación, implicación y motivación del personal para aplicar el Sistema de Gestión con la máxima cualificación.",
+  "Mejora continua de diseño y fabricación mediante control de planos y procedimientos.",
+  "Condiciones de trabajo seguras y saludables, adecuadas al propósito, tamaño y contexto de la organización (SST).",
+  "Protección del medio ambiente e incluso prevención de la contaminación, con compromisos específicos pertinentes.",
+  "Eliminación de peligros y reducción de riesgos para la SST.",
+  "Cumplimiento de requisitos legales y otros requisitos aplicables.",
+  "Compromiso de mejora continua del sistema de gestión para mejorar el desempeño.",
+  "Consulta y participación de los trabajadores."
+];
+
+const panels = [
+  {
+    id: 'intro',
+    title: 'Política de Gestión Integrada',
+    content: intro
+  },
+  {
+    id: 'alcance',
+    title: 'Alcance de la actividad',
+    content: 'Diseño, fabricación, gestión, implantación y mantenimiento de proyectos de imagen corporativa.'
+  },
+  {
+    id: 'normas',
+    title: 'Normas y certificaciones',
+    content: 'Sistema de Gestión basado en UNE-EN ISO 9001:2015, UNE-EN ISO 14001:2015 e ISO 45001:2018.'
+  }
+];
+---
+
+<section class="py-16 bg-white">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header class="text-center mb-10">
+      <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">Calidad, medio ambiente, seguridad y salud</h2>
+      <p class="text-gray-600 mt-3">Nuestra política de gestión integrada y compromisos clave.</p>
+    </header>
+
+    <div class="space-y-4">
+      {panels.map((p) => (
+        <details class="group rounded-xl ring-1 ring-gray-200 bg-gray-50 open:bg-white transition" id={`panel-${p.id}`}>
+          <summary class="cursor-pointer list-none px-5 py-4 flex items-center justify-between">
+            <span class="font-semibold text-gray-900">{p.title}</span>
+            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-5 pb-5 text-gray-700 leading-relaxed">
+            {p.content}
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <div class="mt-10 bg-gray-50 rounded-2xl p-6 ring-1 ring-gray-200">
+      <h3 class="text-xl font-semibold text-gray-900 mb-4">Compromisos</h3>
+      <ul class="space-y-2">
+        {commitments.map((c) => (
+          <li class="flex items-start">
+            <svg class="w-5 h-5 mt-0.5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="ml-3 text-gray-700">{c}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="text-sm text-gray-500 mt-4">Dirección — Septiembre 2020</p>
+    </div>
+  </div>
+</section>

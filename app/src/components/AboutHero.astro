@@ -1,0 +1,31 @@
+---
+export interface Props {
+  image?: string | { src: string; width?: number; height?: number }; // string o ImageMetadata
+  height?: string;   // "50vh", "60vh", etc.
+  title: string;
+  subtitle?: string;
+  overlay?: string;  // "bg-black/50" por defecto
+}
+
+const {
+  image,
+  height = '50vh',
+  overlay = 'bg-black/50',
+  title,
+  subtitle = ''
+} = Astro.props;
+
+const src = typeof image === 'string' ? image : image?.src;
+---
+
+<section class="relative flex items-center justify-center overflow-hidden" style={`height:${height}`}>
+  {src && (
+    <img src={src} alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover" loading="eager" decoding="async" />
+  )}
+  <div class={`absolute inset-0 ${overlay}`} aria-hidden="true"></div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+    <h1 class="text-4xl sm:text-5xl font-bold mb-4">{title}</h1>
+    {subtitle && <p class="text-lg sm:text-xl opacity-95 max-w-3xl mx-auto">{subtitle}</p>}
+  </div>
+</section>

@@ -1,0 +1,20 @@
+---
+const certs = [
+  { code: 'ISO 9001:2015', label: 'Gestión de la Calidad' },
+  { code: 'ISO 14001:2015', label: 'Gestión Ambiental' },
+  { code: 'ISO 45001:2018', label: 'Seguridad y Salud en el Trabajo' }
+];
+---
+
+<section class="py-12 bg-neutral-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {certs.map((c) => (
+        <div class="bg-white rounded-xl p-6 shadow-sm ring-1 ring-gray-100 text-center">
+          <div class="text-lg font-semibold text-gray-900">{c.code}</div>
+          <div class="text-gray-600 mt-1">{c.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
