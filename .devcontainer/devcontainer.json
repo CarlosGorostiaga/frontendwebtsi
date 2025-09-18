@@ -3,6 +3,13 @@
   "dockerComposeFile": ["../docker-compose.yml"],
   "service": "web",
   "workspaceFolder": "/workspace",
+  "forwardPorts": [4321],
+  "portsAttributes": {
+    "4321": {
+      "label": "Astro Dev",
+      "onAutoForward": "openBrowser"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [

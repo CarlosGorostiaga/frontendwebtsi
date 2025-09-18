@@ -1,0 +1,67 @@
+---
+export interface Props {
+  image: string | { src: string; width?: number; height?: number }; // admite string o ImageMetadata
+  height?: string;   // ej: "65vh", "70vh", "600px"
+  overlay?: string;  // ej: "bg-black/50"
+  title: string;
+  subtitle: string;
+}
+
+const {
+  image,
+  height = '65vh',
+  overlay = 'bg-black/50',
+  title,
+  subtitle,
+} = Astro.props;
+
+// si viene ImageMetadata, uso image.src
+const src = typeof image === 'string' ? image : image.src;
+---
+
+<section class="relative flex items-center justify-center overflow-hidden" style={`height:${height}`}>
+  <!-- Imagen de fondo -->
+  <img 
+    src={src} 
+    alt="" 
+    aria-hidden="true" 
+    class="absolute inset-0 w-full h-full object-cover" 
+    loading="eager" 
+    decoding="async" 
+  />
+
+  <!-- Capa oscura encima de la imagen -->
+  <div class={`absolute inset-0 ${overlay}`} aria-hidden="true"></div>
+
+  <!-- Contenido -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 drop-shadow-2xl">
+      {title}
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
+        con Experiencia
+      </span>
+    </h1>
+
+    <p class="text-xl sm:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
+      {subtitle}
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a 
+        href="/proyectos" 
+        class="text-white px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 transform hover:scale-105"
+        style="background-color:#f66500; box-shadow:0 8px 25px 0 rgba(246,101,0,.5);"
+      >
+        Ver Proyectos
+      </a>
+
+      <a 
+        href="/contacto" 
+        class="bg-white/90 backdrop-blur-sm px-8 py-4 rounded-lg font-semibold hover:bg-white transition-all duration-200 transform hover:scale-105"
+        style="color:#f66500; border:2px solid rgba(255,255,255,.3);"
+      >
+        Contactar
+      </a>
+    </div>
+  </div>
+</section>

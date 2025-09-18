@@ -1,8 +1,34 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import "../styles/global.css";
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import Stats from '../components/Stats.astro';
+import portada from '../assets/images/portada.jpg';
+
 ---
 
-<Layout>
-	<h2 class="text-3xl font-bold text-blue-600 mb-4">¡Hola mundo con Tailwind!</h2>
-	<p class="text-lg">Ahora Tailwind está funcionando dentro de tu layout.</p>
-</Layout>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home | TSI Grupo</title>
+  </head>
+  <body class="bg-white text-gray-900 min-h-screen flex flex-col">
+    <Header currentPath="/" />
+
+    <main class="flex-1">
+      <Hero 
+        image={portada} 
+        height="65vh"
+        title="Imagen Corporativa"
+        subtitle="Más de 30 años acompañando a grandes empresas en sus proyectos de comunicación visual y cambio continuo. Experiencia, conocimiento y entusiasmo."
+      />
+
+      <Stats />
+    </main>
+
+    <Footer />
+  </body>
+</html>
