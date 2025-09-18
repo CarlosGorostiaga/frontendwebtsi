@@ -1,54 +1,73 @@
 ---
 /**
- * Componente de Servicios (autosuficiente)
- * - No depende de data externa.
- * - Puedes ajustar el array `services` aquí mismo.
- * - Si no quieres botones por tarjeta, pon href: null.
+ * Services.astro
+ * Grid de 6 servicios con fotos grandes 16:9
  */
 
-const services = [
+import imgGestion from '../assets/images/gestionproyectostsi.jpg';
+import imgIDi from '../assets/images/IDi-servicios.jpg';
+import imgInstalacion from '../assets/images/instalacionymontaje.jpeg';
+import imgMantenimiento from '../assets/images/Mantenimiento.jpg';
+import imgProduccion from '../assets/images/produccion-servicios.jpg';
+import imgConsultoria from '../assets/images/consultoria-servicios.jpg';
+
+type Svc = {
+  title: string;
+  desc: string;
+  img: { src: string };
+  href?: string | null;
+  cta?: string;
+};
+
+const services: Svc[] = [
   {
-    title: "Gestión de Proyectos",
-    desc: "Planificación completa: estudio, permisos, fabricación, logística e instalación. Un único interlocutor para todo el ciclo.",
-    icon: "clipboard",
-    href: "/servicios" // cambia si luego tienes página detalle
+    title: "Gestión de proyectos",
+    desc:
+      "Equipo técnico especializado en planificar y orientar proyectos de inicio a fin, adaptando la gestión a los requisitos del cliente: toma de datos, planos, cálculos de ingeniería, etc.",
+    img: imgGestion,
+    href: "/servicios#gestion-de-proyectos",
+    cta: "Saber más"
   },
   {
-    title: "Grandes Estructuras",
-    desc: "Fabricación e instalación de estructuras de gran formato con cálculo estructural, certificaciones y seguridad.",
-    icon: "building",
-    href: "/servicios"
+    title: "Desarrollo, ingeniería e I+D+i",
+    desc:
+      "Ingeniería de producto y constructiva con un departamento de I+D+i. Incorporamos nuevas tecnologías, materiales sostenibles y optimización de procesos productivos.",
+    img: imgIDi,
+    href: "/servicios#idi",
+    cta: "Proyectos de I+D+i"
   },
   {
-    title: "Letras Corpóreas",
-    desc: "Diseño y producción de letras con y sin iluminación, materiales premium y acabados profesionales para máxima visibilidad.",
-    icon: "type",
-    href: "/servicios"
+    title: "Producción",
+    desc:
+      "Planta de producción en Madrid con maquinaria avanzada para cubrir todas las fases con alto rendimiento y acabados impecables. Diferentes secciones especializadas.",
+    img: imgProduccion,
+    href: "/servicios#produccion",
+    cta: "Técnicas de fabricación"
   },
   {
-    title: "Impresión Digital",
-    desc: "Gran formato y alta calidad en múltiples sustratos: vinilos, lonas, rígidos… acabados y montaje incluidos.",
-    icon: "printer",
-    href: "/servicios"
+    title: "Instalación y montaje",
+    desc:
+      "Amplios equipos de montaje para responder a actuaciones urgentes y grandes campañas. Instalamos cualquier elemento de imagen cumpliendo con seguridad y salud.",
+    img: imgInstalacion,
+    href: "/servicios#instalacion",
+    cta: "Cómo trabajamos"
   },
   {
-    title: "Iluminación",
-    desc: "Sistemas LED a medida con alta eficiencia y uniformidad lumínica. Integración con estructuras y rótulos.",
-    icon: "bulb",
-    href: "/servicios"
+    title: "Mantenimiento",
+    desc:
+      "Red de equipos de mantenimiento con respuesta rápida en toda la Península. Programas preventivos, correctivos y siniestros. Obras civiles asociadas a la instalación.",
+    img: imgMantenimiento,
+    href: "/servicios#mantenimiento",
+    cta: "Solicitar mantenimiento"
   },
   {
-    title: "Termoconformado",
-    desc: "Piezas volumétricas en termoplástico con moldes propios, series cortas y medias, y tiempos de entrega ajustados.",
-    icon: "shapes",
-    href: "/servicios"
-  },
-  {
-    title: "Desarrollo, Ingeniería e I+D+i",
-    desc: "Nuevas ingenierías, materiales y procesos. Eficiencia energética, sostenibilidad y optimización productiva.",
-    icon: "lab",
-    href: "/servicios"
-  },
+    title: "Consultoría e imagen corporativa",
+    desc:
+      "Asesoramos a las empresas en la creación, rediseño y gestión de su identidad visual, garantizando coherencia en todos los soportes y puntos de contacto con sus clientes.",
+    img: imgConsultoria,
+    href: "/servicios#consultoria",
+    cta: "Descubrir más"
+  }
 ];
 ---
 
@@ -56,70 +75,49 @@ const services = [
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-14">
       <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Nuestros Servicios</h2>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        Soluciones integrales de imagen corporativa: desde la ingeniería y fabricación hasta la instalación y el mantenimiento.
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+        Soluciones integrales de imagen corporativa: ingeniería, producción, instalación, mantenimiento y consultoría.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {services.map((s, i) => (
-        <article 
-          class="group bg-white p-8 rounded-2xl shadow-lg ring-1 ring-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 opacity-0 translate-y-4 will-change-auto"
-          style="animation: none"
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+      {services.map((s) => (
+        <article
+          class="group bg-white rounded-2xl overflow-hidden shadow-lg ring-1 ring-gray-100 hover:shadow-2xl transition-all duration-300 opacity-0 translate-y-4"
           data-reveal
         >
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-orange-50">
-            {s.icon === "clipboard" && (
-              <svg class="w-6 h-6" style="color:#f66500;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v11a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-              </svg>
-            )}
-            {s.icon === "building" && (
-              <svg class="w-6 h-6" style="color:#f66500;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21h18M5 21V7a2 2 0 012-2h3v16M14 21V5a2 2 0 012-2h1a2 2 0 012 2v16"></path>
-              </svg>
-            )}
-            {s.icon === "type" && (
-              <svg class="w-6 h-6" style="color:#f66500;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M10 6v12m4-12v12M6 18h12"></path>
-              </svg>
-            )}
-            {s.icon === "printer" && (
-              <svg class="w-6 h-6" style="color:#f66500;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9V4h12v5M6 14h12v6H6zM6 14H5a2 2 0 01-2-2V9a2 2 0 012-2h14a2 2 0 012 2v3a2 2 0 01-2 2h-1"></path>
-              </svg>
-            )}
-            {s.icon === "bulb" && (
-              <svg class="w-6 h-6" style="color:#f66500;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 18h6M10 22h4M8 14a6 6 0 118 0l-.6.6A3 3 0 0015 17v1H9v-1a3 3 0 00-1.4-2.4L8 14z"></path>
-              </svg>
-            )}
-            {s.icon === "shapes" && (
-              <svg class="w-6 h-6" style="color:#f66500;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h8v8H3zM13 9h8v10h-8zM7 3h10v4H7z"></path>
-              </svg>
-            )}
-            {s.icon === "lab" && (
-              <svg class="w-6 h-6" style="color:#f66500;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 2v6l-6 10a2 2 0 001.7 3h12.6a2 2 0 001.7-3L14 8V2"></path>
-              </svg>
-            )}
+          <div class="relative w-full aspect-[16/9] overflow-hidden">
+            <img
+              src={s.img.src}
+              alt={s.title}
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+            <h3 class="absolute bottom-3 left-4 right-4 text-white text-xl font-semibold drop-shadow-md">
+              {s.title}
+            </h3>
           </div>
 
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">{s.title}</h3>
-          <p class="text-gray-600 mb-6">{s.desc}</p>
+          <div class="p-6">
+            <p class="text-gray-600 leading-relaxed">{s.desc}</p>
 
-          {s.href && (
-            <a 
-              href={s.href} 
-              class="inline-flex items-center text-sm font-semibold text-orange-600 group-hover:text-orange-700 transition-colors"
-            >
-              Saber más
-              <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-              </svg>
-            </a>
-          )}
+            {s.href && (
+              <div class="mt-6">
+                <a
+                  href={s.href}
+                  class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold text-white transition-colors"
+                  style="background-color:#f66500;"
+                >
+                  {s.cta || "Saber más"}
+                  <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            )}
+          </div>
         </article>
       ))}
     </div>
@@ -127,24 +125,24 @@ const services = [
 </section>
 
 <style>
-  /* pequeña animación de aparición */
   [data-reveal] { opacity: 0; transform: translateY(8px); }
-  [data-reveal].visible { opacity: 1; transform: translateY(0); transition: opacity .5s ease, transform .5s ease; }
+  [data-reveal].visible {
+    opacity: 1; transform: translateY(0);
+    transition: opacity .5s ease, transform .5s ease;
+  }
 </style>
 
 <script>
-  // IntersectionObserver para revelar tarjetas al entrar en viewport
   document.addEventListener('DOMContentLoaded', () => {
-    const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
+    const items = document.querySelectorAll('[data-reveal]');
     const io = new IntersectionObserver((entries, obs) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
-          (e.target as HTMLElement).classList.add('visible');
+          e.target.classList.add('visible');
           obs.unobserve(e.target);
         }
       });
     }, { threshold: 0.2 });
-
     items.forEach(el => io.observe(el));
   });
 </script>
