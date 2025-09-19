@@ -1,8 +1,8 @@
 ---
 // Importa las imágenes que tengas disponibles o usa placeholders
-// import proyectosImg from '../assets/images/team-proyectos.jpg';
-// import fabricacionImg from '../assets/images/team-fabricacion.jpg';
-// import montajeImg from '../assets/images/team-montaje.jpg';
+import proyectosImg from '../assets/images/team-proyectos.jpg';
+import fabricacionImg from '../assets/images/team-fabricacion.jpg';
+import montajeImg from '../assets/images/team-montaje.jpg';
 
 // Definir tipos
 type IconType = 'blueprint' | 'manufacturing' | 'installation';
@@ -21,7 +21,7 @@ const blocks: TeamBlock[] = [
     title: "Gestión de proyectos y desarrollo de ingenierías",
     desc: "Integrado por un equipo de ingenieros, licenciados, delineantes y personal administrativo. Especializados en la planificación y orientación de proyectos desde su inicio hasta la finalización, incluyendo toma de datos, optimización de recursos, desarrollo de planos y cálculos de ingeniería.",
     icon: "blueprint",
-    // image: proyectosImg, // Descomenta cuando tengas las imágenes
+    image: proyectosImg, 
     imageAlt: "Equipo de ingenieros trabajando en proyectos",
     stats: { number: "15+", label: "Ingenieros" }
   },
@@ -29,7 +29,7 @@ const blocks: TeamBlock[] = [
     title: "Fabricación y producción",
     desc: "Personal especializado en cerrajería, grandes estructuras, electrificación, pintura, plástico y vinilo. Instalaciones equipadas para cubrir todas las fases de la producción con alto rendimiento y acabados impecables.",
     icon: "manufacturing",
-    // image: fabricacionImg, // Descomenta cuando tengas las imágenes
+    image: fabricacionImg,
     imageAlt: "Equipo de fabricación y producción",
     stats: { number: "25+", label: "Especialistas" }
   },
@@ -37,7 +37,7 @@ const blocks: TeamBlock[] = [
     title: "Equipos de montaje y mantenimiento",
     desc: "Equipos especializados en imagen corporativa, dotados de furgonetas con cestas elevadoras para reducir tiempos y aumentar la seguridad en instalación y mantenimiento en toda la Península Ibérica.",
     icon: "installation",
-    // image: montajeImg, // Descomenta cuando tengas las imágenes
+    image: montajeImg,
     imageAlt: "Equipo de montaje con furgonetas especializadas",
     stats: { number: "20+", label: "Técnicos" }
   }
