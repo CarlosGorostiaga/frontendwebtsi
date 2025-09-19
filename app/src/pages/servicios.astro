@@ -5,6 +5,8 @@ import Footer from '../components/Footer.astro';
 import AboutHero from '../components/AboutHero.astro';
 import ServicesDetail from '../components/ServicesDetail.astro';
 import serviciosHero from '../assets/images/servicios-hero.jpg'; // Asume que tienes esta imagen
+import ProcessTimeline from '../components/ProcessTimeline.astro'
+// import ClientLogosGrid from '../components/ClientLogosGrid.astro'
 ---
 
 <!doctype html>
@@ -14,6 +16,7 @@ import serviciosHero from '../assets/images/servicios-hero.jpg'; // Asume que ti
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Servicios | TSI Grupo</title>
     <meta name="description" content="Servicios integrales de imagen corporativa: gestión de proyectos, ingeniería, producción, instalación, mantenimiento y consultoría. Más de 30 años de experiencia." />
+    <script src="https://code.iconify.design/iconify-icon/2.0.0/iconify-icon.min.js"></script>
   </head>
   <body class="bg-white text-gray-900 min-h-screen flex flex-col">
     <Header currentPath="/servicios" />
@@ -27,6 +30,9 @@ import serviciosHero from '../assets/images/servicios-hero.jpg'; // Asume que ti
       />
 
       <ServicesDetail />
+
+      <ProcessTimeline />
+
     </main>
 
     <Footer />

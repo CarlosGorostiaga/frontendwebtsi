@@ -1,0 +1,121 @@
+---
+const sectors = [
+  {
+    name: "Retail",
+    logos: [
+      { name: "Decathlon", src: "/logos/decathlon.svg" },
+      { name: "MediaMarkt", src: "/logos/mediamarkt.svg" },
+      { name: "Zara", src: "/logos/zara.svg" },
+    ],
+  },
+  {
+    name: "Industria",
+    logos: [
+      { name: "Repsol", src: "/logos/repsol.svg" },
+      { name: "Iberdrola", src: "/logos/iberdrola.svg" },
+    ],
+  },
+  {
+    name: "Banca & Seguros",
+    logos: [
+      { name: "BBVA", src: "/logos/bbva.svg" },
+      { name: "Mapfre", src: "/logos/mapfre.svg" },
+    ],
+  },
+];
+---
+
+<section class="py-20 lg:py-24 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <span class="badge">Confían en nosotros</span>
+      <h2 class="title">Clientes que ya han <span class="gradient">transformado su imagen</span></h2>
+    </div>
+
+    {sectors.map((sector) => (
+      <div class="mb-10">
+        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">{sector.name}</h3>
+        <div class="logo-grid">
+          {sector.logos.map((logo) => (
+            <div class="logo-item">
+              <img src={logo.src} alt={logo.name} class="logo-img" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  :root {
+    --color-primary: #ff6f1a;
+    --radius: .75rem;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: .75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    padding: .35rem .9rem;
+    border-radius: 9999px;
+    background: rgba(255, 111, 26, .12);
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .title {
+    font-size: clamp(1.75rem, 1rem + 2vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -.025em;
+    color: #111827;
+  }
+
+  .gradient {
+    background: linear-gradient(135deg, var(--color-primary), #ffb380);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .logo-item {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: grid;
+    place-items: center;
+    transition: all .3s ease;
+    cursor: pointer;
+  }
+
+  .logo-item:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 8px 20px rgba(255, 111, 26, .12);
+    transform: translateY(-2px);
+  }
+
+  .logo-img {
+    max-width: 100%;
+    max-height: 40px;
+    filter: grayscale(100%) opacity(.75);
+    transition: filter .3s ease;
+  }
+
+  .logo-item:hover .logo-img {
+    filter: grayscale(0%) opacity(1);
+  }
+
+  @media (min-width: 768px) {
+    .logo-grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+  }
+</style>
