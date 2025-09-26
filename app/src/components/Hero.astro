@@ -18,252 +18,97 @@ const {
 const src = typeof image === 'string' ? image : image.src;
 ---
 
-<section class="relative flex items-center justify-center overflow-hidden hero-section" style={`height:${height}`}>
-  <!-- Imagen de fondo con efecto parallax sutil -->
-  <div class="absolute inset-0">
-    <img 
-      src={src} 
-      alt="" 
-      aria-hidden="true" 
-      class="w-full h-full object-cover transform scale-105 hero-image" 
-      loading="eager" 
-      decoding="async" 
-    />
-  </div>
+<section
+  class="relative flex items-center justify-center overflow-hidden"
+  style={`height:${height}`}
+>
+  <!-- Imagen de fondo -->
+  <img
+    src={src}
+    alt=""
+    aria-hidden="true"
+    class="absolute inset-0 w-full h-full object-cover scale-105 md:animate-[subtleParallax_20s_ease-in-out_infinite_alternate]"
+    loading="eager"
+    decoding="async"
+  />
 
-  <!-- Overlay con gradiente más sofisticado -->
-  <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60" aria-hidden="true"></div>
-  
-  <!-- Elementos decorativos minimalistas -->
-  <div class="absolute inset-0 opacity-10" aria-hidden="true">
-    <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-white rounded-full animate-pulse"></div>
-    <div class="absolute bottom-1/3 left-1/5 w-1 h-1 bg-white rounded-full animate-pulse" style="animation-delay: 1.5s;"></div>
-  </div>
+  <!-- Overlay -->
+  <div
+    class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60"
+    aria-hidden="true"
+  ></div>
 
-  <!-- Contenido principal -->
+  <!-- Contenido -->
   <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <!-- Línea decorativa superior -->
-    <div class="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent mx-auto mb-8 hero-line"></div>
-    
-    <!-- Título principal -->
-    <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl font-light mb-8 text-white tracking-tight">
+    <!-- Línea superior -->
+    <div class="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent mx-auto mb-8 animate-[expandLine_1s_ease-out_0.2s_both]"></div>
+
+    <!-- Título -->
+    <h1
+      class="text-4xl sm:text-5xl lg:text-6xl font-light mb-8 text-white tracking-tight text-shadow-xl leading-tight animate-[fadeInUp_1.2s_ease-out_0.3s_both]"
+    >
       <span class="font-normal">{title}</span>
       <br />
-      <span class="hero-gradient font-semibold">con Experiencia</span>
+      <span
+        class="font-semibold bg-gradient-to-br from-orange-500 to-orange-300 bg-clip-text text-transparent"
+      >
+        con Experiencia
+      </span>
     </h1>
 
     <!-- Subtítulo -->
-    <div class="hero-subtitle mb-12">
-      <p class="text-lg sm:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed font-light">
-        {subtitle}
-      </p>
-    </div>
+    <p
+      class="text-lg sm:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed font-light mb-12 animate-[fadeInUp_1.2s_ease-out_0.6s_both]"
+    >
+      {subtitle}
+    </p>
 
-    <!-- Botones CTA minimalistas -->
-    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center hero-buttons">
-      <a 
-        href="/proyectos" 
-        class="group relative overflow-hidden px-8 py-4 rounded-full font-medium transition-all duration-300 hero-cta-primary"
-        style="background-color: #f66500;"
+    <!-- Botones -->
+    <div
+      class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-[fadeInUp_1.2s_ease-out_0.9s_both]"
+    >
+      <a
+        href="/proyectos"
+        aria-label="Ver todos los proyectos"
+        class="group relative overflow-hidden px-8 py-4 rounded-full font-medium text-white bg-orange-600 shadow-orange-500/40 hover:shadow-orange-500/50 hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto max-w-[280px] sm:max-w-none"
       >
-        <span class="relative z-10 text-white">Ver Proyectos</span>
-        <div class="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        Ver Proyectos
       </a>
 
-      <a 
-        href="/contacto" 
-        class="group px-8 py-4 rounded-full font-medium border-2 border-white/30 text-white backdrop-blur-sm hover:border-white/50 hover:bg-white/10 transition-all duration-300 hero-cta-secondary"
+      <a
+        href="/contacto"
+        aria-label="Ir al formulario de contacto"
+        class="group px-8 py-4 rounded-full font-medium border-2 border-white/30 text-white backdrop-blur-sm hover:border-white/50 hover:bg-white/10 hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto max-w-[280px] sm:max-w-none"
       >
         Contactar
       </a>
     </div>
 
-    <!-- Línea decorativa inferior -->
-    <div class="w-8 h-px bg-white/40 mx-auto mt-12 hero-line-bottom"></div>
+    <!-- Línea inferior -->
+    <div
+      class="w-8 h-px bg-white/40 mx-auto mt-12 animate-[expandLine_1s_ease-out_1.2s_both]"
+    ></div>
   </div>
-
-  <!-- Indicador de scroll minimalista -->
-  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60">
-    <div class="flex flex-col items-center space-y-2 animate-bounce">
-      <span class="text-xs font-light uppercase tracking-widest">Scroll</span>
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-      </svg>
-    </div>
-  </div>
+  <!-- Fin contenido -->
 </section>
 
 <style>
-  .hero-section {
-    position: relative;
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  }
-  
-  /* Imagen con efecto parallax sutil */
-  .hero-image {
-    transition: transform 20s ease-in-out;
-    animation: subtleParallax 20s ease-in-out infinite alternate;
-  }
-  
+  /* Animaciones clave (solo 5 declaraciones) */
   @keyframes subtleParallax {
-    0% { transform: scale(1.05) translateY(0px); }
+    0%   { transform: scale(1.05) translateY(0); }
     100% { transform: scale(1.08) translateY(-10px); }
   }
-  
-  /* Título con tipografía refinada */
-  .hero-title {
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-  }
-  
-  /* Gradiente para "con Experiencia" */
-  .hero-gradient {
-    background: linear-gradient(135deg, #f66500 0%, #ff8533 50%, #ffab66 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-    text-shadow: none;
-  }
-  
-  /* Fallback para navegadores que no soporten gradientes en texto */
-  @supports not (background-clip: text) {
-    .hero-gradient {
-      color: #f66500;
-    }
-  }
-  
-  /* Animaciones de entrada */
-  .hero-title {
-    animation: fadeInUp 1.2s ease-out 0.3s both;
-  }
-  
-  .hero-subtitle {
-    animation: fadeInUp 1.2s ease-out 0.6s both;
-  }
-  
-  .hero-buttons {
-    animation: fadeInUp 1.2s ease-out 0.9s both;
-  }
-  
-  .hero-line {
-    animation: expandLine 1s ease-out 0.2s both;
-  }
-  
-  .hero-line-bottom {
-    animation: expandLine 1s ease-out 1.2s both;
-  }
-  
   @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
-  
   @keyframes expandLine {
-    from {
-      transform: scaleX(0);
-      opacity: 0;
-    }
-    to {
-      transform: scaleX(1);
-      opacity: 1;
-    }
+    from { transform: scaleX(0); opacity: 0; }
+    to   { transform: scaleX(1); opacity: 1; }
   }
-  
-  /* Efectos hover refinados */
-  .hero-cta-primary {
-    box-shadow: 0 8px 25px rgba(246, 101, 0, 0.4);
-    transform: translateY(0);
-  }
-  
-  .hero-cta-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(246, 101, 0, 0.5);
-  }
-  
-  .hero-cta-secondary:hover {
-    transform: translateY(-2px);
-  }
-  
-  /* Responsive refinado */
-  @media (max-width: 640px) {
-    .hero-title {
-      font-size: 2.5rem;
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
-    }
-    
-    .hero-subtitle p {
-      font-size: 1.125rem;
-      line-height: 1.6;
-    }
-    
-    .hero-buttons {
-      margin-bottom: 2rem;
-    }
-    
-    .hero-cta-primary,
-    .hero-cta-secondary {
-      width: 100%;
-      max-width: 280px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .hero-title {
-      font-size: 2rem;
-    }
-    
-    .hero-buttons {
-      flex-direction: column;
-      gap: 1rem;
-    }
-  }
-  
-  /* Hover para pausar parallax */
-  .hero-section:hover .hero-image {
-    animation-play-state: paused;
-  }
-  
-  /* Accesibilidad mejorada */
+
+  /* Respetar preferencias del usuario */
   @media (prefers-reduced-motion: reduce) {
-    .hero-image {
-      animation: none;
-      transform: scale(1.05);
-    }
-    
-    .hero-title,
-    .hero-subtitle,
-    .hero-buttons,
-    .hero-line,
-    .hero-line-bottom {
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
-    
-    .animate-bounce,
-    .animate-pulse {
-      animation: none;
-    }
-  }
-  
-  /* Mejoras de contraste para mejor legibilidad */
-  @media (prefers-contrast: high) {
-    .hero-gradient {
-      color: #ff6600;
-    }
-    
-    .hero-cta-secondary {
-      border-color: rgba(255, 255, 255, 0.8);
-      background-color: rgba(0, 0, 0, 0.3);
-    }
+    * { animation: none !important; }
   }
 </style>

@@ -63,16 +63,7 @@ const src = typeof image === 'string' ? image : image?.src;
     <!-- Línea decorativa inferior -->
     <div class="w-8 h-px bg-white/40 mx-auto mt-8 hero-line-bottom"></div>
   </div>
-  
-  <!-- Indicador de scroll minimalista -->
-  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/50">
-    <div class="flex flex-col items-center space-y-2 animate-bounce">
-      <span class="text-xs font-light uppercase tracking-widest opacity-70">Scroll</span>
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-      </svg>
-    </div>
-  </div>
+  <!-- Fin contenido -->
 </section>
 
 <style>
@@ -184,7 +175,6 @@ const src = typeof image === 'string' ? image : image?.src;
       transform: none;
     }
     
-    .animate-bounce,
     .animate-pulse {
       animation: none;
     }
